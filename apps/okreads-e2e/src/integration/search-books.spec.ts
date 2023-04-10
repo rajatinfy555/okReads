@@ -2,21 +2,16 @@ import { $, $$, browser, ExpectedConditions } from 'protractor';
 import { expect } from 'chai';
 
 describe('When: Use the search feature', () => {
+  beforeEach(() => {
+    cy.startAt('/');
+  });
 
-  it('Then: I should be able to search books by title', async () => {
-    await browser.get('/');
-    await browser.wait(
+  it('Then: I should be able to search books by title', () => {
+    cy.get('input[type="search"]').type('javascript');
 
-    ExpectedConditions.textToBePresentInElement($('tmo-root'), 'okReads')
-    );
+    cy.get('form').submit();
 
-    const form = await $('form');
-    const input = await $('input[type="search"]');
-    await input.sendKeys('javascript');
-    await form.submit();
-
-    const items = await $$('[data-testing="book-item"]');
-    expect(items.length).to.be.greaterThan(1, 'At least one book');
+    cy.get('[data-testing="book-item"]').should('have.length.greaterThan', 1);
   });
 
   it('Then: I should see search results as I am typing', async () => {

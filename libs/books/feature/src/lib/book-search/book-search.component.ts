@@ -19,7 +19,6 @@ import { debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/oper
 })
 export class BookSearchComponent implements OnInit, OnDestroy {
   books: ReadingListBook[];
-  public displayBooks = false;
   public unsubscriber: Subject<any> = new Subject<void> ();
 
   searchForm = this.fb.group({
@@ -44,11 +43,9 @@ export class BookSearchComponent implements OnInit, OnDestroy {
     this.searchForm.get('term').valueChanges.pipe(
       takeUntil(this.unsubscriber),
       debounceTime(500),
-      distinctUntilChanged(),
-      filter(data => data !== '')
+      distinctUntilChanged(data => data !== '')
     ).subscribe(() => {
       this.searchBooks();
-      this.displayBooks = true;
     });
   }
 
