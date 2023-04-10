@@ -48,12 +48,7 @@ export class BookSearchComponent implements OnInit, OnDestroy {
       this.searchBooks();
     });
   }
-
-  formatDate(date: void | string) {
-    return date
-      ? new Intl.DateTimeFormat('en-US').format(new Date(date))
-      : undefined;
-  }
+  
   addBookToReadingList(book: Book) {
     this.store.dispatch(addToReadingList({ book }));
   }
