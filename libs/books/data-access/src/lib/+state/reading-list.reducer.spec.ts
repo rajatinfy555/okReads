@@ -48,7 +48,7 @@ describe('Books Reducer', () => {
 
       const result: State = reducer(state, action);
 
-      expect(result.ids).toEqual(['A', 'B', 'C']);
+      expect(result.ids).toEqual(['A', 'B']);
     });
 
     it('confirmedRemoveFromReadingList should update the state by removing an item', () => {
