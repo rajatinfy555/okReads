@@ -9,7 +9,7 @@ import {
 } from '@tmo/books/data-access';
 import { FormBuilder } from '@angular/forms';
 import { Book } from '@tmo/shared/models';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -18,8 +18,8 @@ import { debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/oper
   styleUrls: ['./book-search.component.scss']
 })
 export class BookSearchComponent implements OnInit, OnDestroy {
-  books: ReadingListBook[];
-  public unsubscriber: Subject<any> = new Subject<void> ();
+  books$: Observable<ReadingListBook[]> = this.store.select(getAllBooks);
+  dest$: Subject<boolean> = new Subject();
 
   searchForm = this.fb.group({
     term: ''
@@ -32,16 +32,8 @@ export class BookSearchComponent implements OnInit, OnDestroy {
     return this.searchForm.value.term;
   }
   ngOnInit(): void {
-    this.store.select(getAllBooks).subscribe(books => {
-      this.books = books;
-    });
-
-    this.instantSearchOnValueChange();  
-  }
-
-  instantSearchOnValueChange(){
     this.searchForm.get('term').valueChanges.pipe(
-      takeUntil(this.unsubscriber),
+      takeUntil(this.dest$),
       debounceTime(500),
       distinctUntilChanged(data => data !== '')
     ).subscribe(() => {
@@ -65,6 +57,7 @@ export class BookSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.unsubscriber.complete();
+      this.dest$.next(true);
+      this.dest$.complete();
   }
 }
