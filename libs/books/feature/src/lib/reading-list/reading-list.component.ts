@@ -20,14 +20,6 @@ export class ReadingListComponent implements OnInit {
   }
 
   removeFromReadingList(item) {
-    this.store.dispatch(removeFromReadingList({ item }));
-    const removedSnackbar = this.snackBar.open('Removed from reading list', 'Undo', {
-      duration: 3000,
-      horizontalPosition: this.hPosition,
-      verticalPosition: this.vPosition
-    });
-    removedSnackbar.onAction().subscribe(() => {
-      this.store.dispatch(addToReadingList({book: item}));
-    });
+    this.store.dispatch(removeFromReadingList({ item, undo: false }));
   }
 }
