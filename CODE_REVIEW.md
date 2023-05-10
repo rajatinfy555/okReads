@@ -23,6 +23,6 @@ UI IMPROVEMENTS - Manual (Fixed)
 2. "Want to read" button is generic for all books if a user is using screen reader. Aria lable is added for uniquly identifying the   button as per each book.
 
 Additional Scope for Ui Improvemnets
-3.	Spinner should be implemented for better user experience for search API.
-4. We can avoid using autoFocus attribute in the "book-search" component. We can add aria-labels to buttons, say one to the "Want to Read" button in "book-search" component. As auto-focus is better for input elements to automatically set the focus when page loads, while aria-labels for buttons and link help in accessibility for screen readers.
-5. Mobile UX was not correctly rendered. Book sections, reading list and buttons were overlapping. Corrected mobile view to provide better user experience.
+1.	Spinner should be implemented for better user experience for search API.
+2. We can avoid using autoFocus attribute in the "book-search" component. We can add aria-labels to buttons, say one to the "Want to Read" button in "book-search" component. As auto-focus is better for input elements to automatically set the focus when page loads, while aria-labels for buttons and link help in accessibility for screen readers.
+3. Mobile UX was not correctly rendered. Book sections, reading list and buttons were overlapping. Corrected mobile view to provide better user experience.
