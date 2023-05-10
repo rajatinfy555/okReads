@@ -20,12 +20,14 @@ h1 {
 
   button {
     padding: 0 $spacing-xs;
+    background-color: $blue;
+    color: $white;
   }
 }
 
 .header--content {
   display: flex;
-
+  color: black;
   > * {
     display: flex;
     align-items: center;
